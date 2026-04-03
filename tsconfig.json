@@ -15,6 +15,17 @@
     "types": ["node"],
     // and npm install -D @types/node
 
+    // Path Aliases
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["src/shared/*"],
+      "@engine/*": ["src/engine/*"],
+      "@infra/*": ["src/infrastructure/*"],
+      "@ui/*": ["src/ui/*"],
+      "@config/*": ["src/config/*"],
+      "@utils/*": ["src/utils/*"]
+    },
+
     // Other Outputs
     "sourceMap": true,
     "declaration": true,
