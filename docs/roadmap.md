@@ -16,10 +16,10 @@ Passos pequenos e iterativos. Cada item deve ser testado antes de prosseguir.
 
 ## Fase 2 — Componentes ASCII
 
-- [ ] Criar `ascii-border.component.tsx` — caixa com `+---+`
-- [ ] Criar `ascii-menu.component.tsx` — lista com `>` selecionável (`j/k` + `Enter`)
-- [ ] Criar `ascii-health-bar.component.tsx` — barra `[████░░]`
-- [ ] Validar: tela de teste com todos os componentes renderizando
+- [x] Criar `ascii-border.component.tsx` — caixa com `+---+`
+- [x] Criar `ascii-menu.component.tsx` — lista com `>` selecionável (`j/k` + `Enter`)
+- [x] Criar `ascii-health-bar.component.tsx` — barra `[████░░]`
+- [x] Validar: tela de teste com todos os componentes renderizando
 
 ---
 

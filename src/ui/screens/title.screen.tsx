@@ -1,0 +1,46 @@
+import { type ReactElement } from 'react';
+import { Box, Text, useInput, useStdout } from 'ink';
+import { AsciiBorder } from '@ui/components/ascii-border.component';
+
+const TITLE_ART = [
+  ' ▄▄▄        ██████  ██░ ██  ▄▄▄▄    ▒█████   ██▀███   ███▄    █ ▓█████ ',
+  '▒████▄    ▒██    ▒ ▓██░ ██▒▓█████▄ ▒██▒  ██▒▓██ ▒ ██▒ ██ ▀█   █ ▓█   ▀ ',
+  '▒██  ▀█▄  ░ ▓██▄   ▒██▀▀██░▒██▒ ▄██▒██░  ██▒▓██ ░▄█ ▒▓██  ▀█ ██▒▒███   ',
+  '░██▄▄▄▄██   ▒   ██▒░▓█ ░██ ▒██░█▀  ▒██   ██░▒██▀▀█▄  ▓██▒  ▐▌██▒▒▓█  ▄ ',
+  ' ▓█   ▓██▒▒██████▒▒░▓█▒░██▓░▓█  ▀█▓░ ████▓▒░░██▓ ▒██▒▒██░   ▓██░░▒████▒',
+  ' ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒░▒▓███▀▒░ ▒░▒░▒░ ░ ▒▓ ░▒▓░░ ▒░   ▒ ▒ ░░ ▒░ ░',
+  '  ▒   ▒▒ ░░ ░▒  ░ ░ ▒ ░▒░ ░▒░▒   ░   ░ ▒ ▒░   ░▒ ░ ▒░░ ░░   ░ ▒░ ░ ░  ░ ',
+];
+
+const PROMPT_TEXT = '> Pressione qualquer tecla para continuar <';
+
+type TitleScreenProps = {
+  readonly onContinue?: () => void;
+};
+
+export function TitleScreen({ onContinue }: TitleScreenProps): ReactElement {
+  const { stdout } = useStdout();
+  const terminalRows = stdout?.rows ?? 24;
+  const terminalColumns = stdout?.columns ?? 80;
+
+  useInput(() => {
+    onContinue?.();
+  });
+
+  const titleText = TITLE_ART.join('\n');
+
+  return (
+    <Box
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      width={terminalColumns}
+      height={terminalRows}
+      backgroundColor="black"
+    >
+      <AsciiBorder>{titleText}</AsciiBorder>
+      <Text>{'\n'}</Text>
+      <Text dimColor>{PROMPT_TEXT}</Text>
+    </Box>
+  );
+}

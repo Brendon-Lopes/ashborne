@@ -1,4 +1,4 @@
 import { render } from 'ink';
-import { App } from '@ui/app.component';
+import { TitleScreen } from '@ui/screens/title.screen';
 
-render(<App />);
+render(<TitleScreen />);
