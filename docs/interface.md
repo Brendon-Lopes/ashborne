@@ -1,4 +1,4 @@
-# Interface — Ashborne v2
+# Interface — Ashborne
 
 ## Filosofia Visual
 

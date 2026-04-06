@@ -1,4 +1,4 @@
-# Arquitetura — Ashborne v2
+# Arquitetura — Ashborne
 
 ## Arquitetura Hexagonal + DDD Leve
 
@@ -194,23 +194,23 @@ import { DiceRollerPort } from '@shared/ports/dice-roller.port';
 
 ### Sufixos por tipo
 
-| Tipo              | Sufixo           | Exemplo                        |
-| ----------------- | ---------------- | ------------------------------ |
-| Classe de domínio | `.entity.ts`     | `hero.entity.ts`               |
-| Classe de serviço | `.service.ts`    | `dice-roller.service.ts`       |
-| Classe de sistema | `.system.ts`     | `combat.system.ts`             |
-| Interface/Port    | `.port.ts`       | `renderer.port.ts`             |
-| Enum              | `.enum.ts`       | `character-class.enum.ts`      |
-| Type alias        | `.type.ts`       | `combat-result.type.ts`        |
-| Error             | `.error.ts`      | `game.error.ts`                |
-| Util              | `.util.ts`       | `rng.util.ts`                  |
-| Config            | `.config.ts`     | `enemies.config.ts`            |
-| Factory           | `.factory.ts`    | `room.factory.ts`              |
-| Adapter           | `.adapter.ts`    | `save-file.adapter.ts`         |
-| Screen (UI)       | `.screen.tsx`    | `title.screen.tsx`             |
-| Component (UI)    | `.component.tsx` | `ascii-menu.component.tsx`     |
-| Hook (UI)         | `.hook.tsx`      | `use-game-input.hook.tsx`      |
-| Event (narrativa) | `.event.ts`      | `combat.event.ts`              |
+| Tipo              | Sufixo           | Exemplo                    |
+| ----------------- | ---------------- | -------------------------- |
+| Classe de domínio | `.entity.ts`     | `hero.entity.ts`           |
+| Classe de serviço | `.service.ts`    | `dice-roller.service.ts`   |
+| Classe de sistema | `.system.ts`     | `combat.system.ts`         |
+| Interface/Port    | `.port.ts`       | `renderer.port.ts`         |
+| Enum              | `.enum.ts`       | `character-class.enum.ts`  |
+| Type alias        | `.type.ts`       | `combat-result.type.ts`    |
+| Error             | `.error.ts`      | `game.error.ts`            |
+| Util              | `.util.ts`       | `rng.util.ts`              |
+| Config            | `.config.ts`     | `enemies.config.ts`        |
+| Factory           | `.factory.ts`    | `room.factory.ts`          |
+| Adapter           | `.adapter.ts`    | `save-file.adapter.ts`     |
+| Screen (UI)       | `.screen.tsx`    | `title.screen.tsx`         |
+| Component (UI)    | `.component.tsx` | `ascii-menu.component.tsx` |
+| Hook (UI)         | `.hook.tsx`      | `use-game-input.hook.tsx`  |
+| Event (narrativa) | `.event.ts`      | `combat.event.ts`          |
 
 ### Nome do arquivo
 
@@ -266,8 +266,12 @@ export interface DiceRollerPort {
 
 // infrastructure/dice/dice-roller.service.ts
 export class DiceRollerService implements DiceRollerPort {
-  roll(notation: string): number { /* ... */ }
-  rollWithModifier(notation: string, modifier: number): number { /* ... */ }
+  roll(notation: string): number {
+    /* ... */
+  }
+  rollWithModifier(notation: string, modifier: number): number {
+    /* ... */
+  }
 }
 ```
 
@@ -342,13 +346,13 @@ export class CombatService {
 
 ### Componentes base
 
-| Componente | Uso |
-|------------|-----|
-| `ascii-border.component.tsx` | Caixa com borda `+---+` e título opcional |
-| `ascii-menu.component.tsx` | Menu selecionável com `>` (navegação: `j/k` ou setas) |
-| `ascii-health-bar.component.tsx` | Barra `[████████░░] 80/100` |
-| `ascii-dialog.component.tsx` | Caixa de diálogo estilo RPG |
-| `ascii-map.component.tsx` | Renderização do mapa em ASCII |
+| Componente                       | Uso                                                   |
+| -------------------------------- | ----------------------------------------------------- |
+| `ascii-border.component.tsx`     | Caixa com borda `+---+` e título opcional             |
+| `ascii-menu.component.tsx`       | Menu selecionável com `>` (navegação: `j/k` ou setas) |
+| `ascii-health-bar.component.tsx` | Barra `[████████░░] 80/100`                           |
+| `ascii-dialog.component.tsx`     | Caixa de diálogo estilo RPG                           |
+| `ascii-map.component.tsx`        | Renderização do mapa em ASCII                         |
 
 ### Input
 

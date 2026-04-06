@@ -1,4 +1,4 @@
-# AGENTS.md — Ashborne v2
+# AGENTS.md — Ashborne
 
 ## Project State
 

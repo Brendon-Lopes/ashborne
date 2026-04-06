@@ -1,4 +1,4 @@
-# Convenções de Código — Ashborne v2
+# Convenções de Código — Ashborne
 
 ## Clean Code
 

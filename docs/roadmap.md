@@ -1,4 +1,4 @@
-# Roadmap — Ashborne v2
+# Roadmap — Ashborne
 
 Passos pequenos e iterativos. Cada item deve ser testado antes de prosseguir.
 
