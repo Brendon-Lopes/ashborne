@@ -1,9 +1,14 @@
 {
   "name": "ashborne",
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/main.tsx",
+    "build": "node build.mjs",
+    "start": "node dist/main.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -11,7 +16,19 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^25.5.2",
+    "@types/react": "^19.2.14",
+    "@vitejs/plugin-react": "^6.0.1",
+    "esbuild": "^0.27.7",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.2"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "figures": "^6.1.0",
+    "ink": "^6.8.0",
+    "inkjs": "^2.4.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   }
 }

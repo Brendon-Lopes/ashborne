@@ -6,11 +6,11 @@ Passos pequenos e iterativos. Cada item deve ser testado antes de prosseguir.
 
 ## Fase 1 — Fundação
 
-- [ ] Instalar dependências: `ink`, `react`, `chalk`, `figures`, `vitest`, `tsx`
-- [ ] Configurar `vite.config.ts` com path aliases + React
-- [ ] Criar `main.ts` que renderiza `<App />` com Ink
-- [ ] Criar `<App />` que imprime "Hello, Ashborne!" no terminal
-- [ ] Validar: `tsx src/main.ts` mostra texto colorido
+- [x] Instalar dependências: `ink`, `react`, `chalk`, `figures`, `vitest`, `tsx`
+- [x] Configurar `vite.config.ts` com path aliases + React
+- [x] Criar `main.tsx` que renderiza `<App />` com Ink
+- [x] Criar `<App />` que imprime "Hello, Ashborne!" no terminal
+- [x] Validar: `tsx src/main.tsx` mostra texto colorido
 
 ---
 
