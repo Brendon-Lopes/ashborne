@@ -1,27 +1,27 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 import { Box, Text, useInput, useStdout } from 'ink';
 import { AsciiBorder } from '@ui/components/ascii-border.component';
-
-const TITLE_ART = [
-  ' ▄▄▄        ██████  ██░ ██  ▄▄▄▄    ▒█████   ██▀███   ███▄    █ ▓█████ ',
-  '▒████▄    ▒██    ▒ ▓██░ ██▒▓█████▄ ▒██▒  ██▒▓██ ▒ ██▒ ██ ▀█   █ ▓█   ▀ ',
-  '▒██  ▀█▄  ░ ▓██▄   ▒██▀▀██░▒██▒ ▄██▒██░  ██▒▓██ ░▄█ ▒▓██  ▀█ ██▒▒███   ',
-  '░██▄▄▄▄██   ▒   ██▒░▓█ ░██ ▒██░█▀  ▒██   ██░▒██▀▀█▄  ▓██▒  ▐▌██▒▒▓█  ▄ ',
-  ' ▓█   ▓██▒▒██████▒▒░▓█▒░██▓░▓█  ▀█▓░ ████▓▒░░██▓ ▒██▒▒██░   ▓██░░▒████▒',
-  ' ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒░▒▓███▀▒░ ▒░▒░▒░ ░ ▒▓ ░▒▓░░ ▒░   ▒ ▒ ░░ ▒░ ░',
-  '  ▒   ▒▒ ░░ ░▒  ░ ░ ▒ ░▒░ ░▒░▒   ░   ░ ▒ ▒░   ░▒ ░ ▒░░ ░░   ░ ▒░ ░ ░  ░ ',
-];
-
-const PROMPT_TEXT = '> Pressione qualquer tecla para continuar <';
+import { TITLE_ART, PROMPT_TEXT, BLINK_INTERVAL } from '@ui/constants/title.constants';
 
 type TitleScreenProps = {
   readonly onContinue?: () => void;
 };
 
 export function TitleScreen({ onContinue }: TitleScreenProps): ReactElement {
+  const [visible, setVisible] = useState(true);
   const { stdout } = useStdout();
   const terminalRows = stdout?.rows ?? 24;
   const terminalColumns = stdout?.columns ?? 80;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible((prev) => !prev);
+    }, BLINK_INTERVAL);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   useInput(() => {
     onContinue?.();
@@ -38,9 +38,11 @@ export function TitleScreen({ onContinue }: TitleScreenProps): ReactElement {
       height={terminalRows}
       backgroundColor="black"
     >
-      <AsciiBorder>{titleText}</AsciiBorder>
+      <AsciiBorder padding={2}>{titleText}</AsciiBorder>
       <Text>{'\n'}</Text>
-      <Text dimColor>{PROMPT_TEXT}</Text>
+      <Text dimColor>
+        {visible ? '>' : ' '} {PROMPT_TEXT} {visible ? '<' : ' '}
+      </Text>
     </Box>
   );
 }
