@@ -15,23 +15,31 @@ Terminal-based roguelike game using **React + Ink** (React terminal renderer). F
 
 ```
 ui/ → engine/*/application/ → engine/*/domain/ → shared/
+ui/ → game/systems/*/ → shared/
+ui/ → narrative/ → shared/
 infrastructure/ → shared/ (implements ports)
 ```
 
 **Golden rule:** No layer imports from a more outer layer. `shared/` imports nothing.
 
 > **Note:** `config/` and `utils/` are leaf modules (static data and pure functions) importable by any layer.
+>
+> **`game/`** — Game systems layer (world generation, character, events, meta-progression, AI, i18n, narrative, input). Flat system structure, each subfolder owns its service(s).
+>
+> **`narrative/`** — Narrative data layer (`.ink` files, compiled JSON). Consumed by the narrative system in `game/`.
 
 ## Path Aliases (tsconfig.json)
 
-| Alias       | Maps to                |
-| ----------- | ---------------------- |
-| `@shared/*` | `src/shared/*`         |
-| `@engine/*` | `src/engine/*`         |
-| `@infra/*`  | `src/infrastructure/*` |
-| `@ui/*`     | `src/ui/*`             |
-| `@config/*` | `src/config/*`         |
-| `@utils/*`  | `src/utils/*`          |
+| Alias         | Maps to                |
+| ------------- | ---------------------- |
+| `@shared/*`   | `src/shared/*`         |
+| `@engine/*`   | `src/engine/*`         |
+| `@infra/*`    | `src/infrastructure/*` |
+| `@game/*`     | `src/game/*`           |
+| `@narrative/*`| `src/narrative/*`      |
+| `@ui/*`       | `src/ui/*`             |
+| `@config/*`   | `src/config/*`         |
+| `@utils/*`    | `src/utils/*`          |
 
 Always use aliases, never long relative imports.
 
