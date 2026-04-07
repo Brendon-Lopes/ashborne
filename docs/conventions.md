@@ -46,10 +46,9 @@ const dmg = 15;
 - **Métodos privados** pra lógica interna
 
 ```ts
-export class CombatSystem {
+export class CombatService {
   constructor(
     private readonly dice: DiceRollerPort,
-    private readonly logger: LoggerPort,
   ) {}
 
   resolveAttack(attacker: HeroEntity, defender: EnemyEntity): CombatResultType {
@@ -57,7 +56,6 @@ export class CombatSystem {
     const damage = this.calculateDamage(roll, attacker, defender);
     const result = this.applyDamage(defender, damage);
 
-    this.logCombat(attacker, defender, result);
     return result;
   }
 
@@ -77,10 +75,6 @@ export class CombatSystem {
       isMiss: false,
     };
   }
-
-  private logCombat(attacker: HeroEntity, defender: EnemyEntity, result: CombatResultType): void {
-    this.logger.log(`${attacker.name} dealt ${result.damage} to ${defender.name}`);
-  }
 }
 ```
 
@@ -94,7 +88,7 @@ export class CombatSystem {
 
 ### Ponto e vírgula
 
-- **Sempre** — `semi: true` no tsconfig
+- **Sempre** — enforced pelo linter/formatter quando adicionado
 
 ### Ordem de imports
 
@@ -104,20 +98,19 @@ import path from 'node:path';
 
 // 2. External packages
 import chalk from 'chalk';
-import terminal from 'terminal-kit';
 
 // 3. Internal — ports (camada mais interna)
-import type { DiceRollerPort } from '../shared/ports/dice-roller.port.js';
-import type { RendererPort } from '../shared/ports/renderer.port.js';
+import type { DiceRollerPort } from '@shared/ports/dice-roller.port';
+import type { RendererPort } from '@shared/ports/renderer.port';
 
 // 4. Internal — entities
-import { HeroEntity } from '../shared/entities/hero.entity.js';
+import { HeroEntity } from '@shared/entities/hero.entity';
 
 // 5. Internal — siblings
-import { DamageCalculator } from './damage.calculator.js';
+import { DamageCalculator } from '@engine/combat/application/damage.calculator';
 
 // 6. Internal — utils
-import { formatNumber } from '../utils/format.util.js';
+import { formatNumber } from '@utils/format.util';
 ```
 
 ### Linhas em branco
@@ -140,7 +133,7 @@ import { formatNumber } from '../utils/format.util.js';
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "exactOptionalPropertyTypes": true,
-    "forceConsistentCasingInFileNames": true
+    "verbatimModuleSyntax": true
   }
 }
 ```
@@ -278,11 +271,18 @@ tests/
 │       └── hero.entity.spec.ts
 ├── engine/
 │   ├── combat/
-│   │   └── combat.system.spec.ts
+│   │   └── application/
+│   │       └── combat.service.spec.ts
+│   └── exploration/
+│       └── application/
+│           └── dungeon-generator.service.spec.ts
+├── infrastructure/
 │   └── dice/
 │       └── dice-roller.service.spec.ts
-└── narrative/
-    └── choice-handler.spec.ts
+└── engine/
+    └── narrative/
+        └── application/
+            └── choice-handler.spec.ts
 ```
 
 ### Naming
@@ -314,20 +314,20 @@ describe('HeroEntity', () => {
 - **Mocks nos ports**, nunca na implementação
 
 ```ts
-describe('CombatSystem', () => {
-  let diceRoller: Mock<DiceRollerPort>;
-  let combat: CombatSystem;
+describe('CombatService', () => {
+  let diceRoller: { roll: ReturnType<typeof vi.fn> };
+  let combat: CombatService;
 
   beforeEach(() => {
     diceRoller = { roll: vi.fn() };
-    combat = new CombatSystem(diceRoller);
+    combat = new CombatService(diceRoller as DiceRollerPort);
   });
 
   it('should deal damage equal to roll + attack - defense', () => {
     // Arrange
     vi.mocked(diceRoller.roll).mockReturnValue(15);
-    const hero = createHero({ attack: 10 });
-    const enemy = createEnemy({ defense: 3 });
+    const hero = new HeroEntity('1', 'Hero', 50, 50, 10, 5, 1, 0);
+    const enemy = new EnemyEntity('2', 'Goblin', 30, 30, 8, 3, 1);
 
     // Act
     const result = combat.resolveAttack(hero, enemy);

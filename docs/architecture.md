@@ -99,6 +99,7 @@ src/
 │       │   ├── story-node.entity.ts
 │       │   └── choice.type.ts
 │       └── application/
+│           ├── story-engine.ts
 │           ├── choice-handler.ts
 │           ├── event-pool.service.ts
 │           └── events/
@@ -142,7 +143,7 @@ src/
 ├── utils/
 │   └── format.util.ts
 │
-└── main.ts                      # Entry point + Composition Root
+└── main.tsx                     # Entry point + Composition Root
 ```
 
 ---
@@ -198,7 +199,6 @@ import { DiceRollerPort } from '@shared/ports/dice-roller.port';
 | ----------------- | ---------------- | -------------------------- |
 | Classe de domínio | `.entity.ts`     | `hero.entity.ts`           |
 | Classe de serviço | `.service.ts`    | `dice-roller.service.ts`   |
-| Classe de sistema | `.system.ts`     | `combat.system.ts`         |
 | Interface/Port    | `.port.ts`       | `renderer.port.ts`         |
 | Enum              | `.enum.ts`       | `character-class.enum.ts`  |
 | Type alias        | `.type.ts`       | `combat-result.type.ts`    |
@@ -240,10 +240,10 @@ export class CombatService {
 
 ### Composition Root
 
-Todas as dependências são montadas no `main.ts`:
+Todas as dependências são montadas no `main.tsx`:
 
 ```ts
-// main.ts
+// main.tsx
 const rng = createRng(config.seed);
 const diceRoller = new DiceRollerService(rng);
 const damageCalc = new DamageCalculator();
@@ -372,15 +372,19 @@ tests/
 │   └── entities/
 │       └── hero.entity.spec.ts
 ├── engine/
-│   └── combat/
+│   ├── combat/
+│   │   └── application/
+│   │       └── combat.service.spec.ts
+│   └── exploration/
 │       └── application/
-│           └── combat.service.spec.ts
-├── exploration/
-│   └── application/
-│       └── dungeon-generator.service.spec.ts
-└── narrative/
-    └── application/
-        └── choice-handler.spec.ts
+│           └── dungeon-generator.service.spec.ts
+├── infrastructure/
+│   └── dice/
+│       └── dice-roller.service.spec.ts
+└── engine/
+    └── narrative/
+        └── application/
+            └── choice-handler.spec.ts
 ```
 
 ### Regras de teste

@@ -20,6 +20,8 @@ infrastructure/ → shared/ (implements ports)
 
 **Golden rule:** No layer imports from a more outer layer. `shared/` imports nothing.
 
+> **Note:** `config/` and `utils/` are leaf modules (static data and pure functions) importable by any layer.
+
 ## Path Aliases (tsconfig.json)
 
 | Alias       | Maps to                |
@@ -96,7 +98,7 @@ kebab-case with type suffixes:
 
 ## Commands
 
-- Run: `tsx src/main.ts`
+- Run: `tsx src/main.tsx`
 - Typecheck: `npx tsc --noEmit`
 - (No test/lint scripts defined yet — add them when tooling is installed.)
 
