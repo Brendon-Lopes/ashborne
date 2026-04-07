@@ -9,7 +9,7 @@ type IntroScreenProps = {
 };
 
 export function IntroScreen({ onContinue }: IntroScreenProps): ReactElement {
-  const t = useLocale();
+  const { t } = useLocale();
 
   usePressAnyKey(onContinue);
 

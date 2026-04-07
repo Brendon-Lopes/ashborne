@@ -5,7 +5,7 @@ import { AsciiBorder } from '@ui/components/ascii-border.component';
 import { useLocale } from '@ui/hooks/use-locale.hook';
 
 export function CharacterCreationScreen(): ReactElement {
-  const t = useLocale();
+  const { t } = useLocale();
 
   return (
     <Box flexDirection="column" flexGrow={1} alignItems="center" justifyContent="center">

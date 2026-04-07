@@ -5,7 +5,7 @@ import { LocaleProvider } from '@ui/hooks/use-locale.hook';
 import { App } from '@ui/app.component';
 
 const { waitUntilExit } = render(
-  <LocaleProvider locale="en">
+  <LocaleProvider>
     <GameLayout>
       <App />
     </GameLayout>
