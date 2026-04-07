@@ -11,6 +11,8 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, 'src/shared'),
       '@engine': path.resolve(__dirname, 'src/engine'),
       '@infra': path.resolve(__dirname, 'src/infrastructure'),
+      '@game': path.resolve(__dirname, 'src/game'),
+      '@narrative': path.resolve(__dirname, 'src/narrative'),
       '@ui': path.resolve(__dirname, 'src/ui'),
       '@config': path.resolve(__dirname, 'src/config'),
       '@utils': path.resolve(__dirname, 'src/utils'),
