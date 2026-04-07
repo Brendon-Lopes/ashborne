@@ -9,5 +9,3 @@ export const TITLE_ART = Object.freeze([
 ] as const);
 
 export const PROMPT_TEXT = 'Pressione qualquer tecla para continuar';
-
-export const BLINK_INTERVAL = 600;
