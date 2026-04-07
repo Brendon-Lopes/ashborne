@@ -10,30 +10,30 @@ type AsciiBorderProps = {
 export function AsciiBorder({ title, children, padding = 1 }: AsciiBorderProps): ReactElement {
   const lines = children.split('\n');
   const contentWidth = lines.reduce((max, line) => Math.max(max, line.length), 0);
-  const titleWidth = title ? title.length + 1 : 0;
-  const width = Math.max(contentWidth + padding * 2, titleWidth + 2);
+  // innerWidth = the number of characters between the two '|' delimiters (including side padding)
+  const innerWidth = Math.max(contentWidth + padding * 2, title ? title.length + 2 : 0);
 
   const topLine = title
-    ? '+' + title + ' '.repeat(width - title.length - 1) + '+'
-    : '+' + '-'.repeat(width) + '+';
+    ? '+' + title + '-'.repeat(innerWidth - title.length - 1) + '+'
+    : '+' + '-'.repeat(innerWidth) + '+';
 
-  const bottomLine = '+' + '-'.repeat(width) + '+';
+  const bottomLine = '+' + '-'.repeat(innerWidth) + '+';
 
-  const emptyLine = ' '.repeat(width - 2);
-  const paddedLines = lines.map((line) => ' '.repeat(padding) + line);
+  const emptyLine = '|' + ' '.repeat(innerWidth) + '|';
+
+  const contentLines = lines.map((line) => {
+    const padLeft = ' '.repeat(padding);
+    const padRight = ' '.repeat(innerWidth - padding - line.length);
+    return '|' + padLeft + line + padRight + '|';
+  });
 
   const allLines = [
     topLine,
-    ...Array(padding).fill(emptyLine),
-    ...paddedLines,
-    ...Array(padding).fill(emptyLine),
+    ...Array<string>(padding).fill(emptyLine),
+    ...contentLines,
+    ...Array<string>(padding).fill(emptyLine),
     bottomLine,
-  ].map((line) => '| ' + line.padEnd(width - 2) + ' |');
+  ];
 
-  allLines[0] = topLine;
-  allLines[allLines.length - 1] = bottomLine;
-
-  const output = allLines.join('\n');
-
-  return <Text>{output}</Text>;
+  return <Text>{allLines.join('\n')}</Text>;
 }

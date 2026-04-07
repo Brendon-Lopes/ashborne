@@ -1,11 +1,14 @@
 import { render } from 'ink';
 
 import { GameLayout } from '@ui/components/game-layout.component';
-import { TitleScreen } from '@ui/screens/title.screen';
+import { LocaleProvider } from '@ui/hooks/use-locale.hook';
+import { App } from '@ui/app.component';
 
 render(
-  <GameLayout>
-    <TitleScreen />
-  </GameLayout>,
+  <LocaleProvider locale="en">
+    <GameLayout>
+      <App />
+    </GameLayout>
+  </LocaleProvider>,
   { exitOnCtrlC: false },
 );
