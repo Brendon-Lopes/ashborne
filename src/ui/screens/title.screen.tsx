@@ -55,7 +55,8 @@ export function TitleScreen({ onStart }: TitleScreenProps): ReactElement {
     <Box flexDirection="column" flexGrow={1} alignItems="center" justifyContent="center">
       <AsciiBorder padding={2}>{titleText}</AsciiBorder>
       <Text>{'\n'}</Text>
-      <Text dimColor> {t.title.prompt} </Text>
+      <Text> {t.title.prompt} </Text>
+      <Text>{'\n'}</Text>
       <Text dimColor> {t.title.changeLanguageHint}</Text>
 
       {showLanguages && (
