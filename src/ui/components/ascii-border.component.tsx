@@ -14,10 +14,10 @@ export function AsciiBorder({ title, children, padding = 1 }: AsciiBorderProps):
   const innerWidth = Math.max(contentWidth + padding * 2, title ? title.length + 2 : 0);
 
   const topLine = title
-    ? '+' + title + '-'.repeat(innerWidth - title.length - 1) + '+'
-    : '+' + '-'.repeat(innerWidth) + '+';
+    ? '+' + title + '='.repeat(innerWidth - title.length - 1) + '+'
+    : '+' + '='.repeat(innerWidth) + '+';
 
-  const bottomLine = '+' + '-'.repeat(innerWidth) + '+';
+  const bottomLine = '+' + '='.repeat(innerWidth) + '+';
 
   const emptyLine = '|' + ' '.repeat(innerWidth) + '|';
 
