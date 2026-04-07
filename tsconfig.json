@@ -22,6 +22,8 @@
       "@shared/*": ["src/shared/*"],
       "@engine/*": ["src/engine/*"],
       "@infra/*": ["src/infrastructure/*"],
+      "@game/*": ["src/game/*"],
+      "@narrative/*": ["src/narrative/*"],
       "@ui/*": ["src/ui/*"],
       "@config/*": ["src/config/*"],
       "@utils/*": ["src/utils/*"]
