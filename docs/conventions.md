@@ -107,11 +107,11 @@ import chalk from 'chalk';
 import terminal from 'terminal-kit';
 
 // 3. Internal — ports (camada mais interna)
-import type { DiceRollerPort } from '../core/ports/dice-roller.port.js';
-import type { RendererPort } from '../core/ports/renderer.port.js';
+import type { DiceRollerPort } from '../shared/ports/dice-roller.port.js';
+import type { RendererPort } from '../shared/ports/renderer.port.js';
 
 // 4. Internal — entities
-import { HeroEntity } from '../core/entities/hero.entity.js';
+import { HeroEntity } from '../shared/entities/hero.entity.js';
 
 // 5. Internal — siblings
 import { DamageCalculator } from './damage.calculator.js';
@@ -215,7 +215,7 @@ export type EnemyType = string; // definido em config
 ### Errors customizados
 
 ```ts
-// core/errors/game.error.ts
+// shared/errors/game.error.ts
 export class GameError extends Error {
   constructor(
     message: string,
@@ -226,7 +226,7 @@ export class GameError extends Error {
   }
 }
 
-// core/errors/combat.error.ts
+// shared/errors/combat.error.ts
 export class CombatError extends GameError {
   constructor(message: string) {
     super(message, 'COMBAT_ERROR');
@@ -273,7 +273,7 @@ function tryOpenDoor(room: RoomEntity): Result<void> {
 
 ```
 tests/
-├── core/
+├── shared/
 │   └── entities/
 │       └── hero.entity.spec.ts
 ├── engine/
