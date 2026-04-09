@@ -74,21 +74,23 @@ Passos pequenos e iterativos. Cada item deve ser testado antes de prosseguir.
 
 ---
 
-## Fase 8 — Dungeon Generator
+## Fase 8 — Exploração (Grafo Narrativo)
 
-- [ ] Criar `engine/exploration/domain/room.entity.ts`
-- [ ] Criar `engine/exploration/domain/dungeon.entity.ts`
-- [ ] Criar `engine/exploration/application/room.factory.ts`
-- [ ] Criar `engine/exploration/application/dungeon-generator.service.ts`
-- [ ] Testes: gera N salas conectadas
-- [ ] Validar: `<MapScreen />` renderiza mapa em ASCII
+- [ ] Criar `engine/exploration/domain/region.entity.ts` — bioma, dificuldade, descrição
+- [ ] Criar `engine/exploration/domain/location.entity.ts` — conexões, eventos, tags
+- [ ] Criar `engine/exploration/domain/connection.type.ts` — links entre locais
+- [ ] Criar `engine/exploration/application/location-explorer.service.ts` — ações disponíveis e resolução
+- [ ] Criar `engine/exploration/application/region-manager.service.ts` — transições entre regiões
+- [ ] Testes: grafo com N locais conectados, ações resolvem corretamente
+- [ ] Validar: `<ExplorationScreen />` renderiza descrição + escolhas contextuais
 
 ---
 
 ## Fase 9 — Game Loop
 
 - [ ] Criar `ui/screens/game.screen.tsx` — orquestra exploração + combate + narrativa
-- [ ] Fluxo: sala → evento → escolha → combate (opcional) → próxima sala
+- [ ] Fluxo: local → descrição → escolha → resolve (combate/loot/narrativa/movimento) → próximo local
+- [ ] Integração com `StoryEngine` para nós Ink como locais
 - [ ] Criar `<DeathScreen />` ao morrer
 - [ ] Validar: run completa do início à morte
 

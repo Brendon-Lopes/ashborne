@@ -13,7 +13,7 @@ Dependências **sempre apontam para dentro** — o domínio não conhece nada ex
 │                                                             │
 │  ┌───────────────────────────────────────────────────────┐  │
 │  │                 ENGINE (bounded contexts)              │  │
-│  │  engine/combat/  ·  engine/exploration/  ·  ...        │  │
+│  │  engine/combat/  ·  engine/exploration/  ·  engine/narrative/  ·  ...│  │
 │  │                                                       │  │
 │  │  ┌─────────────────────────────────────────────────┐  │  │
 │  │  │            DOMAIN + SHARED KERNEL               │  │  │
@@ -76,14 +76,15 @@ src/
 │   │       ├── combat.service.ts
 │   │       └── damage.calculator.ts
 │   │
-│   ├── exploration/             # Exploração/Dungeon
+│   ├── exploration/             # Exploração/Navegação
 │   │   ├── domain/
-│   │   │   ├── dungeon.entity.ts
-│   │   │   ├── room.entity.ts
-│   │   │   └── tile-type.enum.ts
+│   │   │   ├── region.entity.ts       # Macro: bioma, dificuldade, descrição
+│   │   │   ├── location.entity.ts     # Meso: conexões, eventos, tags
+│   │   │   └── connection.type.ts     # Links entre locais (direcional/bi)
 │   │   └── application/
-│   │       ├── dungeon-generator.service.ts
-│   │       └── room.factory.ts
+│   │       ├── region-manager.service.ts      # Transições entre regiões
+│   │       ├── location-explorer.service.ts   # Ações e resolução no local
+│   │       └── connection-finder.util.ts      # Caminhos disponíveis
 │   │
 │   ├── progression/             # Meta-progressão
 │   │   ├── domain/
@@ -184,8 +185,8 @@ import { CombatService } from '../../engine/combat/application/combat.service';
 ### Alias por contexto
 
 ```ts
-// Dentro de engine/exploration/application/dungeon-generator.service.ts
-import { DungeonEntity } from '@engine/exploration/domain/dungeon.entity';
+// Dentro de engine/exploration/application/location-explorer.service.ts
+import { LocationEntity } from '@engine/exploration/domain/location.entity';
 import { DiceRollerPort } from '@shared/ports/dice-roller.port';
 ```
 
@@ -377,7 +378,7 @@ tests/
 │   │       └── combat.service.spec.ts
 │   └── exploration/
 │       └── application/
-│           └── dungeon-generator.service.spec.ts
+│           └── location-explorer.service.spec.ts
 ├── infrastructure/
 │   └── dice/
 │       └── dice-roller.service.spec.ts
